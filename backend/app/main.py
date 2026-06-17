@@ -1,5 +1,6 @@
 from fastapi import FastAPI, UploadFile, File
 from app.services.openapi_parser import parse_openapi
+from app.services.storage_service import save_api
 import os
 import shutil
 
@@ -29,4 +30,9 @@ async def upload_api(file: UploadFile = File(...)):
 
     parsed = parse_openapi(filepath)
 
-    return parsed
+    save_api(file.filename, parsed)
+
+    return {
+    "message": "Uploaded successfully",
+    "parsed": parsed
+    }

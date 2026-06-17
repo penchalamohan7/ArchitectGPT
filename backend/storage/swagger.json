@@ -1,0 +1,22 @@
+{
+    "title": "Pet Store API",
+    "version": "1.0.0",
+    "endpointCount": 3,
+    "endpoints": [
+        {
+            "path": "/pets",
+            "method": "GET",
+            "summary": "Get all pets"
+        },
+        {
+            "path": "/pets",
+            "method": "POST",
+            "summary": "Create a pet"
+        },
+        {
+            "path": "/pets/{petId}",
+            "method": "GET",
+            "summary": "Get pet by id"
+        }
+    ]
+}
