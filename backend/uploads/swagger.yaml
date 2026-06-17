@@ -1,0 +1,71 @@
+openapi: 3.0.3
+
+info:
+  title: Pet Store API
+  description: Sample Pet Store API
+  version: 1.0.0
+
+servers:
+  - url: https://api.petstore.com/v1
+
+paths:
+
+  /pets:
+    get:
+      summary: Get all pets
+      operationId: getPets
+
+      responses:
+        "200":
+          description: Success
+
+    post:
+      summary: Create a pet
+      operationId: createPet
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Pet"
+
+      responses:
+        "201":
+          description: Created
+
+  /pets/{petId}:
+    get:
+      summary: Get pet by id
+
+      parameters:
+        - name: petId
+          in: path
+          required: true
+          schema:
+            type: integer
+
+      responses:
+        "200":
+          description: Success
+
+components:
+
+  schemas:
+
+    Pet:
+      type: object
+
+      properties:
+
+        id:
+          type: integer
+
+        name:
+          type: string
+
+        age:
+          type: integer
+
+        breed:
+          type: string
