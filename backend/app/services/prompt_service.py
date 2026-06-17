@@ -1,18 +1,24 @@
 import json
+from app.rag.retriever import retrieve
 
 def build_prompt(summary, question):
 
-    return f"""
-SYSTEM:
-You are an expert API Architect.
+    context = retrieve(question)
 
-API SUMMARY:
+    return f"""
+You are an Expert API Architect.
+
+OpenAPI Summary:
 
 {json.dumps(summary, indent=2)}
 
-QUESTION:
+Knowledge Base:
+
+{" ".join(context)}
+
+Question:
 
 {question}
 
-ANSWER:
+Answer:
 """
