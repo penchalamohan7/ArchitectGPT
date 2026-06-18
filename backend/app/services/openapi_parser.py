@@ -21,8 +21,11 @@ def parse_openapi(file_path):
             })
 
     return {
-        "title": info.get("title"),
-        "version": info.get("version"),
-        "endpointCount": len(endpoints),
-        "endpoints": endpoints
-    }
+    "title": info.get("title"),
+    "version": info.get("version"),
+    "description": info.get("description", ""),
+    "servers": spec.get("servers", []),
+    "security": spec.get("security", []),
+    "endpointCount": len(endpoints),
+    "endpoints": endpoints
+}

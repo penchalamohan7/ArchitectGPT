@@ -2,9 +2,9 @@ import os
 import shutil
 
 from fastapi import APIRouter, UploadFile, File
-
+from app.services.review_storage_service import load_reviews
 from app.models.chat_request import ChatRequest
-
+from app.services.review_service import review_api
 from app.services.openapi_parser import parse_openapi
 from app.services.storage_service import (
     save_api,
@@ -15,6 +15,9 @@ from app.services.storage_service import (
 
 from app.services.prompt_service import build_prompt
 from app.services.llm_service import ask_llm
+from app.services.codegen_service import generate_spring_controller
+from app.services.angular_codegen_service import generate_angular_service
+
 
 router = APIRouter()
 
@@ -74,4 +77,43 @@ def chat(request: ChatRequest):
 
     return {
         "answer": answer
+    }
+
+@router.get("/review")
+def review():
+
+    summary = load_api(get_current_api())
+
+    return review_api(summary)
+
+@router.get("/reviews")
+
+def reviews():
+
+    return load_reviews()
+
+@router.get("/generate/spring")
+
+def generate():
+
+    summary = load_api(get_current_api())
+
+    code = generate_spring_controller(summary)
+
+    return {
+
+        "language": "Spring Boot",
+
+        "code": code
+
+    }
+
+@router.get("/generate/angular")
+def generate_angular():
+
+    summary = load_api(get_current_api())
+
+    return {
+        "language": "Angular",
+        "code": generate_angular_service(summary)
     }
