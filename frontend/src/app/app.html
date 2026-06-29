@@ -1,0 +1,35 @@
+<div class="container">
+
+    <h1>ArchitectGPT</h1>
+
+    <div class="card">
+
+        <h2>{{summary.title}}</h2>
+
+        <h3>Version : {{summary.version}}</h3>
+
+        <h3>Total Endpoints : {{summary.endpointCount}}</h3>
+
+    </div>
+
+    <div class="card">
+
+        <h2>Endpoints</h2>
+
+        @for(endpoint of summary.endpoints; track endpoint.path){
+
+            <div class="endpoint">
+
+                <span class="method">{{endpoint.method}}</span>
+
+                <span class="path">{{endpoint.path}}</span>
+
+                <span class="summary">{{endpoint.summary}}</span>
+
+            </div>
+
+        }
+
+    </div>
+
+</div>
